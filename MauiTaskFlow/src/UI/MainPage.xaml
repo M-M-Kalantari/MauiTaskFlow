@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiTaskFlow.UI.MainPage"
+             Title="My Tasks">
+
+    <Grid
+        Padding="16"
+        RowDefinitions="60,60,*">
+
+        <!-- Header -->
+        <Grid Grid.Row="0">
+            <Label
+                Text="My Tasks"
+                FontSize="28"
+                FontAttributes="Bold"
+                VerticalOptions="Center" />
+        </Grid>
+
+        <!-- Search Box -->
+        <Border
+            Grid.Row="1"
+            Padding="12,0"
+            StrokeThickness="1"
+            StrokeShape="RoundRectangle 12">
+
+            <Entry
+                Placeholder="Search tasks..."
+                ClearButtonVisibility="WhileEditing"
+                VerticalOptions="Center" />
+        </Border>
+
+        <!-- Task List -->
+        <CollectionView
+            Grid.Row="2"
+            Margin="0,16,0,0">
+
+            <CollectionView.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Learn C#</x:String>
+                    <x:String>Build MAUI project</x:String>
+                    <x:String>Study Android</x:String>
+                    <x:String>Complete university project</x:String>
+                    <x:String>Read documentation</x:String>
+                    <x:String>Practice XAML</x:String>
+                    <x:String>Learn CollectionView</x:String>
+                    <x:String>Build TaskFlow</x:String>
+                    <x:String>Review Git commands</x:String>
+                    <x:String>Push project to GitHub</x:String>
+                </x:Array>
+            </CollectionView.ItemsSource>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border
+                        Margin="0,0,0,10"
+                        Padding="7"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 12">
+
+                        <Grid ColumnDefinitions="Auto,*">
+
+                            <CheckBox
+                                Grid.Column="0"
+                                VerticalOptions="Center" />
+
+                            <Label
+                                Grid.Column="1"
+                                Margin="10,0,0,0"
+                                Text="{Binding}"
+                                FontSize="17"
+                                VerticalOptions="Center" />
+
+                        </Grid>
+
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+        <!-- Floating Add Button -->
+        <Button
+            Grid.Row="2"
+            Text="+"
+            FontSize="28"
+            WidthRequest="60"
+            HeightRequest="60"
+            CornerRadius="30"
+            HorizontalOptions="End"
+            VerticalOptions="End"
+            Margin="0,0,8,8" />
+
+    </Grid>
+
+</ContentPage>
