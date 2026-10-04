@@ -71,11 +71,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="src\Data\" />
-      <Folder Include="src\Models\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <MauiXaml Update="src\UI\MainPage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>

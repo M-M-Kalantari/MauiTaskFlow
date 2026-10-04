@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiTaskFlow.UI.MainPage"
-             Title="My Tasks">
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MauiTaskFlow.UI.MainPage"
+    Title="My Tasks">
 
     <Grid
         Padding="16"
@@ -11,12 +12,15 @@
 
         <!-- Header -->
         <Grid Grid.Row="0">
+
             <Label
                 Text="My Tasks"
                 FontSize="28"
                 FontAttributes="Bold"
                 VerticalOptions="Center" />
+
         </Grid>
+
 
         <!-- Search Box -->
         <Border
@@ -29,56 +33,129 @@
                 Placeholder="Search tasks..."
                 ClearButtonVisibility="WhileEditing"
                 VerticalOptions="Center" />
+
         </Border>
+
 
         <!-- Task List -->
         <CollectionView
             Grid.Row="2"
-            Margin="0,16,0,0">
-
-            <CollectionView.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Learn C#</x:String>
-                    <x:String>Build MAUI project</x:String>
-                    <x:String>Study Android</x:String>
-                    <x:String>Complete university project</x:String>
-                    <x:String>Read documentation</x:String>
-                    <x:String>Practice XAML</x:String>
-                    <x:String>Learn CollectionView</x:String>
-                    <x:String>Build TaskFlow</x:String>
-                    <x:String>Review Git commands</x:String>
-                    <x:String>Push project to GitHub</x:String>
-                </x:Array>
-            </CollectionView.ItemsSource>
+            Margin="0,16,0,0"
+            ItemsSource="{Binding Tasks}">
 
             <CollectionView.ItemTemplate>
+
                 <DataTemplate>
-                    <Border
-                        Margin="0,0,0,10"
-                        Padding="7"
-                        StrokeThickness="1"
-                        StrokeShape="RoundRectangle 12">
 
-                        <Grid ColumnDefinitions="Auto,*">
+                    <!-- Space Between Cards -->
+                    <VerticalStackLayout Padding="0,0,0,16">
 
-                            <CheckBox
-                                Grid.Column="0"
-                                VerticalOptions="Center" />
+                        <!-- Task Card -->
+                        <Border
+                            Padding="14"
+                            BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 14">
 
-                            <Label
-                                Grid.Column="1"
-                                Margin="10,0,0,0"
-                                Text="{Binding}"
-                                FontSize="17"
-                                VerticalOptions="Center" />
+                            <Border.Shadow>
+                                <Shadow
+                                    Offset="0,3"
+                                    Radius="8"
+                                    Opacity="0.18" />
+                            </Border.Shadow>
 
-                        </Grid>
 
-                    </Border>
+                            <Grid
+                                RowDefinitions="Auto,Auto,Auto"
+                                ColumnDefinitions="Auto,*,Auto"
+                                RowSpacing="6">
+
+                                <!-- Checkbox -->
+                                <CheckBox
+                                    Grid.Row="0"
+                                    Grid.RowSpan="3"
+                                    Grid.Column="0"
+                                    IsChecked="{Binding IsCompleted}"
+                                    VerticalOptions="Center" />
+
+
+                                <!-- Title -->
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Text="{Binding Title}"
+                                    FontSize="17"
+                                    FontAttributes="Bold"
+                                    VerticalOptions="Center" />
+
+
+                                <!-- Menu -->
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    Text="⋮"
+                                    FontSize="24"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center" />
+
+
+                                <!-- Metadata -->
+                                <HorizontalStackLayout
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="2"
+                                    Spacing="6">
+
+                                    <Label
+                                        Text="{Binding DueDate}"
+                                        FontSize="12"
+                                        Opacity="0.7" />
+
+                                    <Label
+                                        Text="•"
+                                        FontSize="12"
+                                        Opacity="0.5" />
+
+                                    <Label
+                                        Text="{Binding DueTime}"
+                                        FontSize="12"
+                                        Opacity="0.7" />
+
+                                    <Label
+                                        Text="•"
+                                        FontSize="12"
+                                        Opacity="0.5" />
+
+                                    <Label
+                                        Text="{Binding Priority}"
+                                        FontSize="12"
+                                        Opacity="0.7" />
+
+                                </HorizontalStackLayout>
+
+
+                                <!-- Description -->
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="2"
+                                    Text="{Binding Description}"
+                                    FontSize="13"
+                                    Opacity="0.65"
+                                    LineBreakMode="TailTruncation" />
+
+                            </Grid>
+
+                        </Border>
+
+                    </VerticalStackLayout>
+
                 </DataTemplate>
+
             </CollectionView.ItemTemplate>
 
         </CollectionView>
+
 
         <!-- Floating Add Button -->
         <Button
